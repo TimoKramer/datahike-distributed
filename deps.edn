@@ -1,0 +1,4 @@
+{:deps {org.clojure/clojure {:mvn/version "1.11.1"}
+        io.github.replikativ/datahike-server-transactor {:git/sha "ff879a6fe031e24117ddc31baf9d8df8e1b190bb"}
+        io.replikativ/datahike  {:git/sha "b1baacb27d64e506304d0ceefad933224670b82d"
+                                 :git/url "https://github.com/replikativ/datahike.git"}}}
