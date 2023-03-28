@@ -12,14 +12,10 @@
                        :schema-flexibility :write
                        :writer {:backend :datahike-server
                                 :client-config  {:timeout 300
-                                                 :endpoint "http://localhost:3333"
+                                                 :endpoint "http://localhost:4444"
                                                  :db-name "users"}}})
 
-(comment
-  (d/create-database distributed-cfg1)
-  (d/delete-database distributed-cfg1)
-  (def conn (d/connect distributed-cfg1))
-  (d/release conn))
+(def conn (d/connect distributed-cfg1))
 
 (d/transact conn [[:db/add -1 :name "bar"]])
 (d/transact conn [[:db/add -1 :name "foo"]])

@@ -10,6 +10,5 @@ Start datahike-server with this config and the same version of datahike like in 
  :server {:port  4444
           :join? false
           :loglevel :trace
-          :dev-mode true
-          :token :securerandompassword}}
+          :dev-mode true}}
 ```
