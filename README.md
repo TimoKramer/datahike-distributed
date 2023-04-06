@@ -1,6 +1,6 @@
 # Setup
 
-Start datahike-server with this config and the same version of datahike like in this project's `deps.edn`:
+Start [datahike-server](https://github.com/replikativ/datahike-server) `0.1.107+` with this config and the same version of datahike like in this project's `deps.edn`:
 ```clojure
 {:databases [{:store {:backend :file
                       :scope "test.lambdaforge.net"
