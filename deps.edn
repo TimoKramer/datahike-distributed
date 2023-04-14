@@ -1,3 +1,9 @@
 {:deps {org.clojure/clojure {:mvn/version "1.11.1"}
+<<<<<<< HEAD
         io.replikativ/datahike {:mvn/version "0.6.1539"}
         io.github.replikativ/datahike-server-transactor {:git/sha "ff879a6fe031e24117ddc31baf9d8df8e1b190bb"}}}
+=======
+        io.github.replikativ/datahike-server-transactor {:git/sha "b03ec9af32406dfd1f776e6eda73ae5199bfd05f"
+                                                         :git/url "https://github.com/replikativ/datahike-server-transactor"}
+        io.replikativ/datahike  {:mvn/version "0.6.1539"}}}
+>>>>>>> 9528830 (Update example to new datahike-server.)
