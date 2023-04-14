@@ -1,37 +1,32 @@
 (ns datahike-distributed.core
+  (:gen-class)
   (:require [datahike.api :as d]
             [datahike-server-transactor.core]
-            [taoensso.timbre :as log]))
+            [taoensso.timbre :as log]
+            [clojure.java.io :as io]
+            [clojure.edn :as edn]
+            [tea-time.core :as tt]))
 
-(log/set-level! :trace)
+(log/set-level! :debug)
 
-(def distributed-cfg1 {:store {:backend :file
-                               :scope "test.lambdaforge.net"
-                               :path "/tmp/users"}
-                       :keep-history? true
-                       :schema-flexibility :write
-                       :writer {:backend :datahike-server
-                                :client-config  {:timeout 300
-                                                 :endpoint "http://localhost:3333"}}})
+(def distributed-cfg (-> (io/resource "config.edn")
+                         slurp
+                         edn/read-string))
+
+(def conn (d/connect distributed-cfg))
+
+(tt/start!)
+
+(def ^:dynamic *tt* nil)
+
+(defn -main []
+  (->> (tt/every! 10 2 (bound-fn [] (->> (d/q {:query '[:find (pull ?e [*])
+                                                        :where
+                                                        [?e :name ?name]]}
+                                            @conn)
+                                         (log/info "Result: "))))
+       (alter-var-root (var *tt*))))
 
 (comment
-  ;; not supported client side yet
-  (d/create-database distributed-cfg1)
-  (d/delete-database distributed-cfg1))
-
-(def conn (d/connect distributed-cfg1))
-
-(d/transact conn [{:db/ident       :name
-                   :db/valueType   :db.type/string
-                   :db/cardinality :db.cardinality/one}
-                  {:db/ident       :age
-                   :db/valueType   :db.type/long
-                   :db/cardinality :db.cardinality/one}])
-
-(d/transact conn [[:db/add -1 :name "foo"]])
-
-(d/q {:query '[:find ?name
-               :where [_ :name ?name]]}
-     @conn)
-
-(d/release conn)
+  (-main)
+  (tt/cancel! *tt*))

@@ -1,9 +1,15 @@
 {:deps {org.clojure/clojure {:mvn/version "1.11.1"}
-<<<<<<< HEAD
         io.replikativ/datahike {:mvn/version "0.6.1539"}
-        io.github.replikativ/datahike-server-transactor {:git/sha "ff879a6fe031e24117ddc31baf9d8df8e1b190bb"}}}
-=======
-        io.github.replikativ/datahike-server-transactor {:git/sha "b03ec9af32406dfd1f776e6eda73ae5199bfd05f"
-                                                         :git/url "https://github.com/replikativ/datahike-server-transactor"}
-        io.replikativ/datahike  {:mvn/version "0.6.1539"}}}
->>>>>>> 9528830 (Update example to new datahike-server.)
+        io.github.replikativ/datahike-server-transactor {:git/sha "b03ec9af32406dfd1f776e6eda73ae5199bfd05f"}
+        tea-time/tea-time {:mvn/version "1.0.1"}
+        com.taoensso/timbre {:mvn/version "6.1.0"}}
+ :paths ["src" "resources"]
+ :aliases {:build {:deps       {io.github.clojure/tools.build   {:git/tag "v0.8.2" :git/sha "ba1a2bf"}
+                                slipset/deps-deploy             {:mvn/version "0.2.0"}
+                                borkdude/gh-release-artifact    {:git/url "https://github.com/borkdude/gh-release-artifact"
+                                                                 :sha     "cf082df46a648178d1904e9cbcb787d8136a35c6"}
+                                babashka/babashka.curl          {:mvn/version "0.1.2"}
+                                babashka/fs                     {:mvn/version "0.1.6"}
+                                cheshire/cheshire               {:mvn/version "5.11.0"}
+                                com.google.cloud.tools/jib-core {:mvn/version "0.23.0"}}
+                   :ns-default build}}}

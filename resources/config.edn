@@ -1,0 +1,8 @@
+{:store {:backend :file
+         :scope "test.lambdaforge.net"
+         :path "/tmp/users"}
+ :keep-history? true
+ :schema-flexibility :write
+ :writer {:backend :datahike-server
+          :client-config  {:timeout 300
+                           :endpoint "http://localhost:4444"}}}
